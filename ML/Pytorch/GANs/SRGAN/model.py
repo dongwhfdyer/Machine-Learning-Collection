@@ -4,13 +4,13 @@ from torch import nn
 
 class ConvBlock(nn.Module):
     def __init__(
-        self,
-        in_channels,
-        out_channels,
-        discriminator=False,
-        use_act=True,
-        use_bn=True,
-        **kwargs,
+            self,
+            in_channels,
+            out_channels,
+            discriminator=False,
+            use_act=True,
+            use_bn=True,
+            **kwargs,
     ):
         super().__init__()
         self.use_act = use_act
@@ -102,7 +102,7 @@ class Discriminator(nn.Module):
         self.classifier = nn.Sequential(
             nn.AdaptiveAvgPool2d((6, 6)),
             nn.Flatten(),
-            nn.Linear(512*6*6, 1024),
+            nn.Linear(512 * 6 * 6, 1024),
             nn.LeakyReLU(0.2, inplace=True),
             nn.Linear(1024, 1),
         )
@@ -110,6 +110,7 @@ class Discriminator(nn.Module):
     def forward(self, x):
         x = self.blocks(x)
         return self.classifier(x)
+
 
 def test():
     low_resolution = 24  # 96x96 -> 24x24

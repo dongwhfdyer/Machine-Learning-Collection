@@ -8,6 +8,7 @@ from albumentations.pytorch import ToTensorV2
 from torch.utils.data import Dataset
 import os
 
+
 class ImageFolder(Dataset):
     def __init__(self, root_dir, transform=None):
         super(ImageFolder, self).__init__()
@@ -18,7 +19,7 @@ class ImageFolder(Dataset):
 
         for index, name in enumerate(self.class_names):
             files = os.listdir(os.path.join(root_dir, name))
-            self.data += list(zip(files, [index]*len(files)))
+            self.data += list(zip(files, [index] * len(files)))
 
     def __len__(self):
         return len(self.data)
@@ -58,5 +59,5 @@ transform = A.Compose(
 
 dataset = ImageFolder(root_dir="cat_dogs", transform=transform)
 
-for x,y in dataset:
+for x, y in dataset:
     print(x.shape)

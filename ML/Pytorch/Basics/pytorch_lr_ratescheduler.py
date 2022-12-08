@@ -81,6 +81,7 @@ for epoch in range(1, num_epochs):
     scheduler.step(mean_loss)
     print(f"Cost at epoch {epoch} is {mean_loss}")
 
+
 # Check accuracy on training & test to see how good our model
 def check_accuracy(loader, model):
     num_correct = 0
@@ -98,7 +99,7 @@ def check_accuracy(loader, model):
             num_samples += predictions.size(0)
 
         print(
-            f"Got {num_correct} / {num_samples} with accuracy {float(num_correct)/float(num_samples)*100:.2f}"
+            f"Got {num_correct} / {num_samples} with accuracy {float(num_correct) / float(num_samples) * 100:.2f}"
         )
 
     model.train()

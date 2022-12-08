@@ -96,7 +96,6 @@ train_writer = tf.summary.create_file_writer("logs/train/")
 test_writer = tf.summary.create_file_writer("logs/test/")
 train_step = test_step = 0
 
-
 for lr in [1e-1, 1e-2, 1e-3, 1e-4, 1e-5]:
     train_step = test_step = 0
     train_writer = tf.summary.create_file_writer("logs/train/" + str(lr))

@@ -22,7 +22,7 @@ def plot_examples(images, bboxes=None):
         if bboxes is not None:
             img = visualize_bbox(images[i - 1], bboxes[i - 1], class_name="Elon")
         else:
-            img = images[i-1]
+            img = images[i - 1]
         fig.add_subplot(rows, columns, i)
         plt.imshow(img)
     plt.show()

@@ -36,8 +36,8 @@ transforms = transforms.Compose(
 )
 
 dataset = datasets.MNIST(root="dataset/", transform=transforms, download=True)
-#comment mnist and uncomment below if you want to train on CelebA dataset
-#dataset = datasets.ImageFolder(root="celeb_dataset", transform=transforms)
+# comment mnist and uncomment below if you want to train on CelebA dataset
+# dataset = datasets.ImageFolder(root="celeb_dataset", transform=transforms)
 loader = DataLoader(dataset, batch_size=BATCH_SIZE, shuffle=True)
 
 # initialize gen and disc/critic

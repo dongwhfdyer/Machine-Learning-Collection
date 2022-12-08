@@ -28,18 +28,15 @@ class VariationalAutoEncoder(nn.Module):
     def forward(self, x):
         mu, sigma = self.encode(x)
         epsilon = torch.randn_like(sigma)
-        z_new = mu + sigma*epsilon
+        z_new = mu + sigma * epsilon
         x_reconstructed = self.decode(z_new)
         return x_reconstructed, mu, sigma
 
 
 if __name__ == "__main__":
-    x = torch.randn(4, 28*28)
+    x = torch.randn(4, 28 * 28)
     vae = VariationalAutoEncoder(input_dim=784)
     x_reconstructed, mu, sigma = vae(x)
     print(x_reconstructed.shape)
     print(mu.shape)
     print(sigma.shape)
-
-
-

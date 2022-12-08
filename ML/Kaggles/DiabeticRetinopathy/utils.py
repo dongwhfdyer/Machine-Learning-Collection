@@ -78,7 +78,7 @@ def save_checkpoint(state, filename="my_checkpoint.pth.tar"):
 def load_checkpoint(checkpoint, model, optimizer, lr):
     print("=> Loading checkpoint")
     model.load_state_dict(checkpoint["state_dict"])
-    #optimizer.load_state_dict(checkpoint["optimizer"])
+    # optimizer.load_state_dict(checkpoint["optimizer"])
 
     # If we don't do this then it will just have learning rate of old checkpoint
     # and it will lead to many hours of debugging \:
@@ -106,9 +106,9 @@ def get_csv_for_blend(loader, model, output_csv_file):
             preds = model(images).reshape(images.shape[0] // 2, 2, 1)
             new_features = (
                 torch.cat([features_logits, preds], dim=2)
-                .view(preds.shape[0], -1)
-                .cpu()
-                .numpy()
+                    .view(preds.shape[0], -1)
+                    .cpu()
+                    .numpy()
             )
             all_features.append(new_features)
             filename_first += image_files[::2]

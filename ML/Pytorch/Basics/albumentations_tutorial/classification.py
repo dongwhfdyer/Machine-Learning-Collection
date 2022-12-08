@@ -28,4 +28,3 @@ for i in range(15):
     augmented_img = augmentations["image"]
     images_list.append(augmented_img)
 plot_examples(images_list)
-

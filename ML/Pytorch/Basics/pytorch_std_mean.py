@@ -8,6 +8,7 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 train_set = datasets.CIFAR10(root="ds/", transform=transforms.ToTensor(), download=True)
 train_loader = DataLoader(dataset=train_set, batch_size=64, shuffle=True)
 
+
 def get_mean_std(loader):
     # var[X] = E[X**2] - E[X]**2
     channels_sum, channels_sqrd_sum, num_batches = 0, 0, 0

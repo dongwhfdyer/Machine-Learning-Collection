@@ -46,18 +46,18 @@ def get_loader(image_size):
 
 
 def train_fn(
-    critic,
-    gen,
-    loader,
-    dataset,
-    step,
-    alpha,
-    opt_critic,
-    opt_gen,
-    tensorboard_step,
-    writer,
-    scaler_gen,
-    scaler_critic,
+        critic,
+        gen,
+        loader,
+        dataset,
+        step,
+        alpha,
+        opt_critic,
+        opt_gen,
+        tensorboard_step,
+        writer,
+        scaler_gen,
+        scaler_critic,
 ):
     loop = tqdm(loader, leave=True)
     for batch_idx, (real, _) in enumerate(loop):
@@ -74,9 +74,9 @@ def train_fn(
             critic_fake = critic(fake.detach(), alpha, step)
             gp = gradient_penalty(critic, real, fake, alpha, step, device=config.DEVICE)
             loss_critic = (
-                -(torch.mean(critic_real) - torch.mean(critic_fake))
-                + config.LAMBDA_GP * gp
-                + (0.001 * torch.mean(critic_real ** 2))
+                    -(torch.mean(critic_real) - torch.mean(critic_fake))
+                    + config.LAMBDA_GP * gp
+                    + (0.001 * torch.mean(critic_real ** 2))
             )
 
         opt_critic.zero_grad()
@@ -96,7 +96,7 @@ def train_fn(
 
         # Update alpha and ensure less than 1
         alpha += cur_batch_size / (
-            (config.PROGRESSIVE_EPOCHS[step] * 0.5) * len(dataset)
+                (config.PROGRESSIVE_EPOCHS[step] * 0.5) * len(dataset)
         )
         alpha = min(alpha, 1)
 
@@ -163,7 +163,7 @@ def main():
         print(f"Current image size: {4 * 2 ** step}")
 
         for epoch in range(num_epochs):
-            print(f"Epoch [{epoch+1}/{num_epochs}]")
+            print(f"Epoch [{epoch + 1}/{num_epochs}]")
             tensorboard_step, alpha = train_fn(
                 critic,
                 gen,

@@ -18,7 +18,7 @@ import torch.nn as nn
 
 class block(nn.Module):
     def __init__(
-        self, in_channels, intermediate_channels, identity_downsample=None, stride=1
+            self, in_channels, intermediate_channels, identity_downsample=None, stride=1
     ):
         super(block, self).__init__()
         self.expansion = 4

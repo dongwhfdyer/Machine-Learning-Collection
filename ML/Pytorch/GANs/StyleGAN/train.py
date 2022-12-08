@@ -24,7 +24,7 @@ torch.backends.cudnn.benchmarks = True
 def get_loader(image_size):
     transform = transforms.Compose(
         [
-            #transforms.Resize((image_size, image_size)),
+            # transforms.Resize((image_size, image_size)),
             transforms.ToTensor(),
             transforms.RandomHorizontalFlip(p=0.5),
             transforms.Normalize(
@@ -46,19 +46,19 @@ def get_loader(image_size):
 
 
 def train_fn(
-    critic,
-    gen,
-    loader,
-    dataset,
-    step,
-    alpha,
-    opt_critic,
-    opt_gen,
-    tensorboard_step,
-    writer,
-    scaler_gen,
-    scaler_critic,
-    ema,
+        critic,
+        gen,
+        loader,
+        dataset,
+        step,
+        alpha,
+        opt_critic,
+        opt_gen,
+        tensorboard_step,
+        writer,
+        scaler_gen,
+        scaler_critic,
+        ema,
 ):
     loop = tqdm(loader, leave=True)
     gen2 = Generator(
@@ -79,9 +79,9 @@ def train_fn(
             critic_fake = critic(fake.detach(), alpha, step)
             gp = gradient_penalty(critic, real, fake, alpha, step, device=config.DEVICE)
             loss_critic = (
-                -(torch.mean(critic_real) - torch.mean(critic_fake))
-                + config.LAMBDA_GP * gp
-                + (0.001 * torch.mean(critic_real ** 2))
+                    -(torch.mean(critic_real) - torch.mean(critic_fake))
+                    + config.LAMBDA_GP * gp
+                    + (0.001 * torch.mean(critic_real ** 2))
             )
 
         opt_critic.zero_grad()
@@ -101,7 +101,7 @@ def train_fn(
 
         # Update alpha and ensure less than 1
         alpha += cur_batch_size / (
-            (config.PROGRESSIVE_EPOCHS[step] * 0.5) * len(dataset)
+                (config.PROGRESSIVE_EPOCHS[step] * 0.5) * len(dataset)
         )
         alpha = min(alpha, 1)
 
@@ -124,7 +124,6 @@ def train_fn(
             gp=gp.item(),
             loss_critic=loss_critic.item(),
         )
-
 
     return tensorboard_step, alpha
 
@@ -167,12 +166,12 @@ def main():
     # start at step that corresponds to img size that we set in config
     step = int(log2(config.START_TRAIN_AT_IMG_SIZE / 4))
     for num_epochs in config.PROGRESSIVE_EPOCHS[step:]:
-        alpha = 1e-5   # start with very low alpha
+        alpha = 1e-5  # start with very low alpha
         loader, dataset = get_loader(4 * 2 ** step)  # 4->0, 8->1, 16->2, 32->3, 64 -> 4
         print(f"Current image size: {4 * 2 ** step}")
 
         for epoch in range(num_epochs):
-            print(f"Epoch [{epoch+1}/{num_epochs}]")
+            print(f"Epoch [{epoch + 1}/{num_epochs}]")
             tensorboard_step, alpha = train_fn(
                 critic,
                 gen,

@@ -7,7 +7,6 @@ from torch.utils.data import DataLoader, Dataset
 from PIL import Image  # Load img
 import torchvision.transforms as transforms
 
-
 # We want to convert text -> numerical values
 # 1. We need a Vocabulary mapping each word to a index
 # 2. We need to setup a Pytorch dataset to load the data
@@ -104,13 +103,13 @@ class MyCollate:
 
 
 def get_loader(
-    root_folder,
-    annotation_file,
-    transform,
-    batch_size=32,
-    num_workers=8,
-    shuffle=True,
-    pin_memory=True,
+        root_folder,
+        annotation_file,
+        transform,
+        batch_size=32,
+        num_workers=8,
+        shuffle=True,
+        pin_memory=True,
 ):
     dataset = FlickrDataset(root_folder, annotation_file, transform=transform)
 
@@ -130,7 +129,7 @@ def get_loader(
 
 if __name__ == "__main__":
     transform = transforms.Compose(
-        [transforms.Resize((224, 224)), transforms.ToTensor(),]
+        [transforms.Resize((224, 224)), transforms.ToTensor(), ]
     )
 
     loader, dataset = get_loader(

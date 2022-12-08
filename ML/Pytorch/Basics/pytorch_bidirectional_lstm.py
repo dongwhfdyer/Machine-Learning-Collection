@@ -6,7 +6,6 @@ Programmed by Aladdin Persson <aladdin.persson at hotmail dot com>
 
 """
 
-
 # Imports
 import torch
 import torchvision
@@ -31,6 +30,7 @@ num_classes = 10
 learning_rate = 0.001
 batch_size = 64
 num_epochs = 2
+
 
 # Create a bidirectional LSTM
 class BRNN(nn.Module):
@@ -90,6 +90,7 @@ for epoch in range(num_epochs):
         # gradient descent or adam step
         optimizer.step()
 
+
 # Check accuracy on training & test to see how good our model
 
 
@@ -115,7 +116,7 @@ def check_accuracy(loader, model):
 
         print(
             f"Got {num_correct} / {num_samples} with accuracy  \
-              {float(num_correct)/float(num_samples)*100:.2f}"
+              {float(num_correct) / float(num_samples) * 100:.2f}"
         )
 
     model.train()

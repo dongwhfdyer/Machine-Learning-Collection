@@ -25,6 +25,7 @@ phi_values = {
     "b7": (6, 600, 0.5),
 }
 
+
 class CNNBlock(nn.Module):
     def __init__(
             self, in_channels, out_channels, kernel_size, stride, padding, groups=1
@@ -40,16 +41,17 @@ class CNNBlock(nn.Module):
             bias=False,
         )
         self.bn = nn.BatchNorm2d(out_channels)
-        self.silu = nn.SiLU() # SiLU <-> Swish
+        self.silu = nn.SiLU()  # SiLU <-> Swish
 
     def forward(self, x):
         return self.silu(self.bn(self.cnn(x)))
+
 
 class SqueezeExcitation(nn.Module):
     def __init__(self, in_channels, reduced_dim):
         super(SqueezeExcitation, self).__init__()
         self.se = nn.Sequential(
-            nn.AdaptiveAvgPool2d(1), # C x H x W -> C x 1 x 1
+            nn.AdaptiveAvgPool2d(1),  # C x H x W -> C x 1 x 1
             nn.Conv2d(in_channels, reduced_dim, 1),
             nn.SiLU(),
             nn.Conv2d(reduced_dim, in_channels, 1),
@@ -58,6 +60,7 @@ class SqueezeExcitation(nn.Module):
 
     def forward(self, x):
         return x * self.se(x)
+
 
 class InvertedResidualBlock(nn.Module):
     def __init__(
@@ -68,8 +71,8 @@ class InvertedResidualBlock(nn.Module):
             stride,
             padding,
             expand_ratio,
-            reduction=4, # squeeze excitation
-            survival_prob=0.8, # for stochastic depth
+            reduction=4,  # squeeze excitation
+            survival_prob=0.8,  # for stochastic depth
     ):
         super(InvertedResidualBlock, self).__init__()
         self.survival_prob = 0.8
@@ -132,7 +135,7 @@ class EfficientNet(nn.Module):
         in_channels = channels
 
         for expand_ratio, channels, repeats, stride, kernel_size in base_model:
-            out_channels = 4*ceil(int(channels*width_factor) / 4)
+            out_channels = 4 * ceil(int(channels * width_factor) / 4)
             layers_repeats = ceil(repeats * depth_factor)
 
             for layer in range(layers_repeats):
@@ -141,9 +144,9 @@ class EfficientNet(nn.Module):
                         in_channels,
                         out_channels,
                         expand_ratio=expand_ratio,
-                        stride = stride if layer == 0 else 1,
+                        stride=stride if layer == 0 else 1,
                         kernel_size=kernel_size,
-                        padding=kernel_size//2, # if k=1:pad=0, k=3:pad=1, k=5:pad=2
+                        padding=kernel_size // 2,  # if k=1:pad=0, k=3:pad=1, k=5:pad=2
                     )
                 )
                 in_channels = out_channels
@@ -170,13 +173,7 @@ def test():
         num_classes=num_classes,
     ).to(device)
 
-    print(model(x).shape) # (num_examples, num_classes)
+    print(model(x).shape)  # (num_examples, num_classes)
+
 
 test()
-
-
-
-
-
-
-

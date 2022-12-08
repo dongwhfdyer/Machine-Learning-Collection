@@ -95,9 +95,8 @@ class visdom_plotting(object):
         }
 
     def create_plot(
-        self, loss_list, batch_list, validation_acc_list, epoch_list, training_acc_list
+            self, loss_list, batch_list, validation_acc_list, epoch_list, training_acc_list
     ):
-
         if self.viz.check_connection():
             self.cur_batch_win = self.viz.line(
                 torch.FloatTensor(loss_list),
@@ -125,6 +124,5 @@ class visdom_plotting(object):
                 update=(None if self.cur_training_acc is None else "replace"),
                 opts=self.cur_training_acc_opts,
             )
-
 
 #

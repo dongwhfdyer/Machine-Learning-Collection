@@ -1,5 +1,6 @@
 # disable tensorflow debugging messages
 import os
+
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
 from vggnet import VGGNet
@@ -17,5 +18,5 @@ VGG_types = {
 
 if __name__ == "__main__":
     # test VGGNet16
-    model = VGGNet(name = "VGGNet16", architecture = VGG_types["VGG16"], input_shape=(224, 224, 3), classes = 1000)
+    model = VGGNet(name="VGGNet16", architecture=VGG_types["VGG16"], input_shape=(224, 224, 3), classes=1000)
     model.summary()

@@ -23,7 +23,7 @@ def train_one_epoch(loader, model, optimizer, loss_fn, scaler, device):
     for batch_idx, (data, targets, _) in enumerate(loop):
         # save examples and make sure they look ok with the data augmentation,
         # tip is to first set mean=[0,0,0], std=[1,1,1] so they look "normal"
-        #save_image(data, f"hi_{batch_idx}.png")
+        # save_image(data, f"hi_{batch_idx}.png")
 
         data = data.to(device=device)
         targets = targets.to(device=device)
@@ -42,7 +42,7 @@ def train_one_epoch(loader, model, optimizer, loss_fn, scaler, device):
         scaler.update()
         loop.set_postfix(loss=loss.item())
 
-    print(f"Loss average over epoch: {sum(losses)/len(losses)}")
+    print(f"Loss average over epoch: {sum(losses) / len(losses)}")
 
 
 def main():
@@ -99,7 +99,7 @@ def main():
     make_prediction(model, test_loader, "submission_.csv")
     import sys
     sys.exit()
-    #make_prediction(model, test_loader)
+    # make_prediction(model, test_loader)
 
     for epoch in range(config.NUM_EPOCHS):
         train_one_epoch(train_loader, model, optimizer, loss_fn, scaler, config.DEVICE)
@@ -109,8 +109,8 @@ def main():
         print(f"QuadraticWeightedKappa (Validation): {cohen_kappa_score(labels, preds, weights='quadratic')}")
 
         # get on train
-        #preds, labels = check_accuracy(train_loader, model, config.DEVICE)
-        #print(f"QuadraticWeightedKappa (Training): {cohen_kappa_score(labels, preds, weights='quadratic')}")
+        # preds, labels = check_accuracy(train_loader, model, config.DEVICE)
+        # print(f"QuadraticWeightedKappa (Training): {cohen_kappa_score(labels, preds, weights='quadratic')}")
 
         if config.SAVE_MODEL:
             checkpoint = {
@@ -118,7 +118,6 @@ def main():
                 "optimizer": optimizer.state_dict(),
             }
             save_checkpoint(checkpoint, filename=f"b3_{epoch}.pth.tar")
-
 
 
 if __name__ == "__main__":

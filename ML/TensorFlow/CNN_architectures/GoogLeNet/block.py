@@ -1,4 +1,4 @@
-  # Tensorflow v.2.3.1
+# Tensorflow v.2.3.1
 
 """
 Programmed by the-robot <https://github.com/the-robot>
@@ -18,13 +18,14 @@ from tensorflow.keras.layers import (
 import tensorflow as tf
 import typing
 
+
 @tf.function
 def convolution_block(
-    X: tf.Tensor,
-    filters: int,
-    kernel_size: int,
-    stride: int = 1,
-    padding: str = 'valid',
+        X: tf.Tensor,
+        filters: int,
+        kernel_size: int,
+        stride: int = 1,
+        padding: str = 'valid',
 ) -> tf.Tensor:
     """
     Convolution block for GoogLeNet.
@@ -39,10 +40,10 @@ def convolution_block(
     """
 
     X = Conv2D(
-        filters = filters,
-        kernel_size = (kernel_size, kernel_size),
-        strides = (stride, stride),
-        padding = padding,
+        filters=filters,
+        kernel_size=(kernel_size, kernel_size),
+        strides=(stride, stride),
+        padding=padding,
     )(X)
     # batch normalization is not in original paper because it was not invented at that time
     # however I am using it here because it will improve the performance
@@ -51,15 +52,16 @@ def convolution_block(
 
     return X
 
+
 @tf.function
 def inception_block(
-    X: tf.Tensor,
-    filters_1x1: int,
-    filters_3x3_reduce: int,
-    filters_3x3: int,
-    filters_5x5_reduce: int,
-    filters_5x5: int,
-    pool_size: int,
+        X: tf.Tensor,
+        filters_1x1: int,
+        filters_3x3_reduce: int,
+        filters_3x3: int,
+        filters_5x5_reduce: int,
+        filters_5x5: int,
+        pool_size: int,
 ) -> tf.Tensor:
     """
     Inception block for GoogLeNet.
@@ -78,59 +80,60 @@ def inception_block(
     # first branch
     conv_1x1 = convolution_block(
         X,
-        filters = filters_1x1,
-        kernel_size = 1,
-        padding = "same"
+        filters=filters_1x1,
+        kernel_size=1,
+        padding="same"
     )
 
     # second branch
     conv_3x3 = convolution_block(
         X,
-        filters = filters_3x3_reduce,
-        kernel_size = 1,
-        padding = "same"
+        filters=filters_3x3_reduce,
+        kernel_size=1,
+        padding="same"
     )
     conv_3x3 = convolution_block(
         conv_3x3,
-        filters = filters_3x3,
-        kernel_size = 3,
-        padding = "same"
+        filters=filters_3x3,
+        kernel_size=3,
+        padding="same"
     )
 
     # third branch
     conv_5x5 = convolution_block(
         X,
-        filters = filters_5x5_reduce,
-        kernel_size = 1,
-        padding = "same"
+        filters=filters_5x5_reduce,
+        kernel_size=1,
+        padding="same"
     )
     conv_5x5 = convolution_block(
         conv_5x5,
-        filters = filters_5x5,
-        kernel_size = 5,
-        padding = "same"
+        filters=filters_5x5,
+        kernel_size=5,
+        padding="same"
     )
 
     # fourth branch
     pool_projection = MaxPooling2D(
-        pool_size = (2, 2),
-        strides = (1, 1),
-        padding = "same",
+        pool_size=(2, 2),
+        strides=(1, 1),
+        padding="same",
     )(X)
     pool_projection = convolution_block(
         pool_projection,
-        filters = pool_size,
-        kernel_size = 1,
-        padding = "same"
+        filters=pool_size,
+        kernel_size=1,
+        padding="same"
     )
 
     # concat by channel/filter
-    return concatenate(inputs = [conv_1x1, conv_3x3, conv_5x5, pool_projection], axis = 3)
+    return concatenate(inputs=[conv_1x1, conv_3x3, conv_5x5, pool_projection], axis=3)
+
 
 @tf.function
 def auxiliary_block(
-    X: tf.Tensor,
-    classes: int,
+        X: tf.Tensor,
+        classes: int,
 ) -> tf.Tensor:
     """
     Auxiliary block for GoogLeNet.
@@ -143,21 +146,21 @@ def auxiliary_block(
     """
 
     X = AveragePooling2D(
-        pool_size = (5, 5),
-        padding = "same",
-        strides = (3, 3),
+        pool_size=(5, 5),
+        padding="same",
+        strides=(3, 3),
     )(X)
     X = convolution_block(
         X,
-        filters = 128,
-        kernel_size = 1,
-        stride = 1,
-        padding = "same",
+        filters=128,
+        kernel_size=1,
+        stride=1,
+        padding="same",
     )
     X = Flatten()(X)
-    X = Dense(units = 1024, activation = "relu")(X)
-    X = Dropout(rate = 0.7)(X)
-    X = Dense(units = classes)(X)
+    X = Dense(units=1024, activation="relu")(X)
+    X = Dropout(rate=0.7)(X)
+    X = Dense(units=classes)(X)
     X = Activation("softmax")(X)
 
     return X

@@ -2,6 +2,7 @@ import torch.nn as nn
 from torchvision.models import vgg19
 import config
 
+
 # phi_5,4 5th conv layer before maxpooling but after activation
 
 class VGGLoss(nn.Module):
@@ -17,5 +18,3 @@ class VGGLoss(nn.Module):
         vgg_input_features = self.vgg(input)
         vgg_target_features = self.vgg(target)
         return self.loss(vgg_input_features, vgg_target_features)
-
-

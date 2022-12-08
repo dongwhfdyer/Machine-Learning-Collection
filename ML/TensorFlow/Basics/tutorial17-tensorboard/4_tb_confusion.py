@@ -98,7 +98,6 @@ train_writer = tf.summary.create_file_writer("logs/train/")
 test_writer = tf.summary.create_file_writer("logs/test/")
 train_step = test_step = 0
 
-
 for epoch in range(num_epochs):
     confusion = np.zeros((len(class_names), len(class_names)))
 

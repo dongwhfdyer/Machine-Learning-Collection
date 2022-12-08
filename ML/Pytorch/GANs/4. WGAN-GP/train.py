@@ -37,7 +37,7 @@ transforms = transforms.Compose(
 
 dataset = datasets.MNIST(root="dataset/", transform=transforms, download=True)
 # comment mnist above and uncomment below for training on CelebA
-#dataset = datasets.ImageFolder(root="celeb_dataset", transform=transforms)
+# dataset = datasets.ImageFolder(root="celeb_dataset", transform=transforms)
 loader = DataLoader(
     dataset,
     batch_size=BATCH_SIZE,
@@ -79,7 +79,7 @@ for epoch in range(NUM_EPOCHS):
             critic_fake = critic(fake).reshape(-1)
             gp = gradient_penalty(critic, real, fake, device=device)
             loss_critic = (
-                -(torch.mean(critic_real) - torch.mean(critic_fake)) + LAMBDA_GP * gp
+                    -(torch.mean(critic_real) - torch.mean(critic_fake)) + LAMBDA_GP * gp
             )
             critic.zero_grad()
             loss_critic.backward(retain_graph=True)

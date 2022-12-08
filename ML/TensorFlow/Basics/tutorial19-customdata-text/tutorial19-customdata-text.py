@@ -28,7 +28,6 @@ import sys
 
 sys.exit()
 
-
 ## Example if you have multiple files
 file_names = ["test_example1.csv", "test_example2.csv", "test_example3.csv"]
 dataset = tf.data.TextLineDataset(file_names)
@@ -41,7 +40,6 @@ dataset = dataset1.concatenate(dataset2).concatenate(dataset3)
 
 for line in dataset:
     print(line)
-
 
 import sys
 
@@ -79,6 +77,8 @@ ds_test = tf.data.TextLineDataset("imdb.csv").filter(filter_test)
 # 3. Pad the batches so we can send in to an RNN for example
 
 tokenizer = tfds.features.text.Tokenizer()
+
+
 # 'i love banana' -> ['i', 'love', 'banana'] -> [0, 1, 2]
 
 
@@ -153,7 +153,7 @@ ds_test = ds_test.padded_batch(32, padded_shapes=([None], ()))
 model = keras.Sequential(
     [
         layers.Masking(mask_value=0),
-        layers.Embedding(input_dim=len(vocabulary) + 2, output_dim=32,),
+        layers.Embedding(input_dim=len(vocabulary) + 2, output_dim=32, ),
         layers.GlobalAveragePooling1D(),
         layers.Dense(64, activation="relu"),
         layers.Dense(1),

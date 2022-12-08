@@ -25,7 +25,7 @@ transform = A.Compose(
 
 images_list = [image]
 image = np.array(image)
-mask = np.array(mask) # np.asarray(mask), np.array(mask)
+mask = np.array(mask)  # np.asarray(mask), np.array(mask)
 mask2 = np.array(mask2)
 for i in range(4):
     augmentations = transform(image=image, masks=[mask, mask2])

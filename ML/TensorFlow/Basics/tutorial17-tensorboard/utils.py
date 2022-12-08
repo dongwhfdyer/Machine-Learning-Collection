@@ -9,6 +9,7 @@ import cv2
 import os
 import shutil
 
+
 # Stolen from tensorflow official guide:
 # https://www.tensorflow.org/tensorboard/image_summaries
 def plot_to_image(figure):
@@ -76,7 +77,7 @@ def plot_confusion_matrix(cm, class_names):
     plt.yticks(indices, class_names)
 
     # Normalize Confusion Matrix
-    cm = np.around(cm.astype("float") / cm.sum(axis=1)[:, np.newaxis], decimals=3,)
+    cm = np.around(cm.astype("float") / cm.sum(axis=1)[:, np.newaxis], decimals=3, )
 
     threshold = cm.max() / 2.0
     for i in range(size):
@@ -120,12 +121,12 @@ def create_sprite(data):
 
 
 def plot_to_projector(
-    x,
-    feature_vector,
-    y,
-    class_names,
-    log_dir="default_log_dir",
-    meta_file="metadata.tsv",
+        x,
+        feature_vector,
+        y,
+        class_names,
+        log_dir="default_log_dir",
+        meta_file="metadata.tsv",
 ):
     assert x.ndim == 4  # (BATCH, H, W, C)
 

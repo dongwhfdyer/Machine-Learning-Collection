@@ -29,9 +29,9 @@ class LogisticRegression:
 
             # calculate cost
             cost = (
-                -1
-                / self.m
-                * np.sum(y * np.log(y_predict) + (1 - y) * np.log(1 - y_predict))
+                    -1
+                    / self.m
+                    * np.sum(y * np.log(y_predict) + (1 - y) * np.log(1 - y_predict))
             )
 
             # back prop / gradient calculations
@@ -67,4 +67,4 @@ if __name__ == "__main__":
     w, b = logreg.train(X, y)
     y_predict = logreg.predict(X)
 
-    print(f"Accuracy: {np.sum(y==y_predict)/X.shape[0]}")
+    print(f"Accuracy: {np.sum(y == y_predict) / X.shape[0]}")

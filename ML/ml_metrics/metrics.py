@@ -71,7 +71,7 @@ def multiclass_accuracy(y_true, y_pred):
     total = len(y_true)
     for label, pred in zip(y_true, y_pred):
         correct += label == pred
-    return correct/total
+    return correct / total
 
 
 def confusion_matrix(y_true, y_pred):
@@ -88,7 +88,7 @@ def confusion_matrix(y_true, y_pred):
 
 
 def accuracy_cm(cm):
-    return np.trace(cm)/np.sum(cm)
+    return np.trace(cm) / np.sum(cm)
 
 
 def balanced_accuracy_cm(cm):
@@ -97,17 +97,17 @@ def balanced_accuracy_cm(cm):
     indices = np.nonzero(rows_sum)[0]
     if rows_sum.shape[0] != indices.shape[0]:
         warnings.warn("y_pred contains classes not in y_true")
-    accuracy_per_class = correctly_classified[indices]/(rows_sum[indices])
-    return np.sum(accuracy_per_class)/accuracy_per_class.shape[0]
+    accuracy_per_class = correctly_classified[indices] / (rows_sum[indices])
+    return np.sum(accuracy_per_class) / accuracy_per_class.shape[0]
 
 
 def precision_cm(cm, average="specific", class_label=1, eps=1e-12):
     tp = np.diagonal(cm)
     fp = np.sum(cm, axis=0) - tp
-    #precisions = np.diagonal(cm)/np.maximum(np.sum(cm, axis=0), 1e-12)
+    # precisions = np.diagonal(cm)/np.maximum(np.sum(cm, axis=0), 1e-12)
 
     if average == "none":
-        return tp/(tp+fp+eps)
+        return tp / (tp + fp + eps)
 
     if average == "specific":
         precisions = tp / (tp + fp + eps)
@@ -123,7 +123,7 @@ def precision_cm(cm, average="specific", class_label=1, eps=1e-12):
         # all classes equally contribute to the average,
         # no distinction between highly and poorly populated classes.
         precisions = tp / (tp + fp + eps)
-        return np.sum(precisions)/precisions.shape[0]
+        return np.sum(precisions) / precisions.shape[0]
 
     if average == "weighted":
         pass
@@ -145,7 +145,7 @@ def recall_cm(cm, average="specific", class_label=1, eps=1e-12):
 
     if average == "macro":
         recalls = tp / (tp + fn + eps)
-        return np.sum(recalls)/recalls.shape[0]
+        return np.sum(recalls) / recalls.shape[0]
 
     if average == "weighted":
         pass
@@ -154,7 +154,8 @@ def recall_cm(cm, average="specific", class_label=1, eps=1e-12):
 def f1score_cm(cm, average="specific", class_label=1):
     precision = precision_cm(cm, average, class_label)
     recall = recall_cm(cm, average, class_label)
-    return 2 * (precision*recall)/(precision+recall)
+    return 2 * (precision * recall) / (precision + recall)
+
 
 # true positive rate <-> sensitivity <-> recall
 # true negative rate <-> specificity <-> recall for neg. class
@@ -179,7 +180,7 @@ def roc_curve(y_true, y_preds, plot_graph=True, calculate_AUC=True, threshold_st
         # note tnr == specificity (which is same as recall for the negative class)
         tnr = recalls[0]
         TPR.append(tpr)
-        FPR.append(1-tnr)
+        FPR.append(1 - tnr)
 
     if plot_graph:
         plt.plot(FPR, TPR)
@@ -228,13 +229,11 @@ with open("data.txt") as f:
         probs.append(pred)
 
 precision_recall_curve(y, probs, threshold_step=0.001)
-#from sklearn.metrics import precision_recall_curve
-#precisions, recalls, _ = precision_recall_curve(y, probs)
-#plt.plot(recalls, precisions)
-#plt.xlabel("Recall")
-#plt.ylabel("Precision")
-#plt.title("Precision-Recall curve")
-#plt.show()
-#print(np.abs(np.trapz(precisions, recalls)))
-
-
+# from sklearn.metrics import precision_recall_curve
+# precisions, recalls, _ = precision_recall_curve(y, probs)
+# plt.plot(recalls, precisions)
+# plt.xlabel("Recall")
+# plt.ylabel("Precision")
+# plt.title("Precision-Recall curve")
+# plt.show()
+# print(np.abs(np.trapz(precisions, recalls)))

@@ -25,6 +25,7 @@ from torch.utils.data import (
 )  # Gives easier dataset managment and creates mini batches
 from torch.utils.tensorboard import SummaryWriter  # to print to tensorboard
 
+
 # Simple CNN
 class CNN(nn.Module):
     def __init__(self, in_channels=1, num_classes=10):

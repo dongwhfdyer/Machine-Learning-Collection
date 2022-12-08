@@ -36,7 +36,7 @@ class WSConv2d(nn.Module):
     """
 
     def __init__(
-        self, in_channels, out_channels, kernel_size=3, stride=1, padding=1, gain=2
+            self, in_channels, out_channels, kernel_size=3, stride=1, padding=1, gain=2
     ):
         super(WSConv2d, self).__init__()
         self.conv = nn.Conv2d(in_channels, out_channels, kernel_size, stride, padding)
@@ -101,7 +101,7 @@ class Generator(nn.Module):
         )
 
         for i in range(
-            len(factors) - 1
+                len(factors) - 1
         ):  # -1 to prevent index error because of factors[i+1]
             conv_in_c = int(in_channels * factors[i])
             conv_out_c = int(in_channels * factors[i + 1])

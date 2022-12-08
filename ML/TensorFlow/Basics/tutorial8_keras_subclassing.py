@@ -13,6 +13,7 @@ tf.config.experimental.set_memory_growth(physical_devices[0], True)
 x_train = x_train.reshape(-1, 28, 28, 1).astype("float32") / 255.0
 x_test = x_test.reshape(-1, 28, 28, 1).astype("float32") / 255.0
 
+
 # CNN -> BatchNorm -> ReLU (common structure)
 # x10 (a lot of code to write!)
 
@@ -31,7 +32,7 @@ class CNNBlock(layers.Layer):
 
 
 model = keras.Sequential(
-    [CNNBlock(32), CNNBlock(64), CNNBlock(128), layers.Flatten(), layers.Dense(10),]
+    [CNNBlock(32), CNNBlock(64), CNNBlock(128), layers.Flatten(), layers.Dense(10), ]
 )
 
 
@@ -48,7 +49,7 @@ class ResBlock(layers.Layer):
     def call(self, input_tensor, training=False):
         x = self.cnn1(input_tensor, training=training)
         x = self.cnn2(x, training=training)
-        x = self.cnn3(x + self.identity_mapping(input_tensor), training=training,)
+        x = self.cnn3(x + self.identity_mapping(input_tensor), training=training, )
         x = self.pooling(x)
         return x
 

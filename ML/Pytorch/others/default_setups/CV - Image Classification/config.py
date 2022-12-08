@@ -12,7 +12,7 @@ LEARNING_RATE = 1e-4
 NUM_EPOCHS = 100
 
 train_transforms = A.Compose([
-    A.Resize(width=224, height=224,),
+    A.Resize(width=224, height=224, ),
     A.RandomCrop(width=224, height=224),
     A.Rotate(40),
     A.HorizontalFlip(p=0.5),

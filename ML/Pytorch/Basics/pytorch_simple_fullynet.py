@@ -14,7 +14,7 @@ Programmed by Aladdin Persson
 
 # Imports
 import torch
-import torchvision # torch package for vision related things
+import torchvision  # torch package for vision related things
 import torch.nn.functional as F  # Parameterless functions, like (some) activation functions
 import torchvision.datasets as datasets  # Standard datasets
 import torchvision.transforms as transforms  # Transformations we can perform on our dataset for augmentation
@@ -22,6 +22,7 @@ from torch import optim  # For optimizers like SGD, Adam, etc.
 from torch import nn  # All neural network modules
 from torch.utils.data import DataLoader  # Gives easier dataset managment by creating mini batches etc.
 from tqdm import tqdm  # For nice progress bar!
+
 
 # Here we create our simple neural network. For more details here we are subclassing and
 # inheriting from nn.Module, this is the most general way to create your networks and
@@ -134,7 +135,6 @@ def check_accuracy(loader, model):
     with torch.no_grad():
         # Loop through the data
         for x, y in loader:
-
             # Move data to device
             x = x.to(device=device)
             y = y.to(device=device)
@@ -153,8 +153,9 @@ def check_accuracy(loader, model):
             num_samples += predictions.size(0)
 
     model.train()
-    return num_correct/num_samples
+    return num_correct / num_samples
+
 
 # Check accuracy on training & test to see how good our model
-print(f"Accuracy on training set: {check_accuracy(train_loader, model)*100:.2f}")
-print(f"Accuracy on test set: {check_accuracy(test_loader, model)*100:.2f}")
+print(f"Accuracy on training set: {check_accuracy(train_loader, model) * 100:.2f}")
+print(f"Accuracy on test set: {check_accuracy(test_loader, model) * 100:.2f}")

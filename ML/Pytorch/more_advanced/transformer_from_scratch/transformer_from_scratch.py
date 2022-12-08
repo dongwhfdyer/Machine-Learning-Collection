@@ -20,7 +20,7 @@ class SelfAttention(nn.Module):
         self.head_dim = embed_size // heads
 
         assert (
-            self.head_dim * heads == embed_size
+                self.head_dim * heads == embed_size
         ), "Embedding size needs to be divisible by heads"
 
         self.values = nn.Linear(embed_size, embed_size)
@@ -104,17 +104,16 @@ class TransformerBlock(nn.Module):
 
 class Encoder(nn.Module):
     def __init__(
-        self,
-        src_vocab_size,
-        embed_size,
-        num_layers,
-        heads,
-        device,
-        forward_expansion,
-        dropout,
-        max_length,
+            self,
+            src_vocab_size,
+            embed_size,
+            num_layers,
+            heads,
+            device,
+            forward_expansion,
+            dropout,
+            max_length,
     ):
-
         super(Encoder, self).__init__()
         self.embed_size = embed_size
         self.device = device
@@ -169,15 +168,15 @@ class DecoderBlock(nn.Module):
 
 class Decoder(nn.Module):
     def __init__(
-        self,
-        trg_vocab_size,
-        embed_size,
-        num_layers,
-        heads,
-        forward_expansion,
-        dropout,
-        device,
-        max_length,
+            self,
+            trg_vocab_size,
+            embed_size,
+            num_layers,
+            heads,
+            forward_expansion,
+            dropout,
+            device,
+            max_length,
     ):
         super(Decoder, self).__init__()
         self.device = device
@@ -208,20 +207,19 @@ class Decoder(nn.Module):
 
 class Transformer(nn.Module):
     def __init__(
-        self,
-        src_vocab_size,
-        trg_vocab_size,
-        src_pad_idx,
-        trg_pad_idx,
-        embed_size=512,
-        num_layers=6,
-        forward_expansion=4,
-        heads=8,
-        dropout=0,
-        device="cpu",
-        max_length=100,
+            self,
+            src_vocab_size,
+            trg_vocab_size,
+            src_pad_idx,
+            trg_pad_idx,
+            embed_size=512,
+            num_layers=6,
+            forward_expansion=4,
+            heads=8,
+            dropout=0,
+            device="cpu",
+            max_length=100,
     ):
-
         super(Transformer, self).__init__()
 
         self.encoder = Encoder(

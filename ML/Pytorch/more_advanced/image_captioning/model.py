@@ -38,7 +38,7 @@ class DecoderRNN(nn.Module):
 class CNNtoRNN(nn.Module):
     def __init__(self, embed_size, hidden_size, vocab_size, num_layers):
         super(CNNtoRNN, self).__init__()
-        self.encoderCNN = EncoderCNN(embed_size)
+        self.encoderCNN = EncoderCNN(embed_size)G
         self.decoderRNN = DecoderRNN(embed_size, hidden_size, vocab_size, num_layers)
 
     def forward(self, images, captions):
@@ -64,3 +64,6 @@ class CNNtoRNN(nn.Module):
                     break
 
         return [vocabulary.itos[idx] for idx in result_caption]
+
+
+if __name__ == '__main__':

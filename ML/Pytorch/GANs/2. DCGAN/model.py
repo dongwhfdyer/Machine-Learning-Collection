@@ -34,7 +34,7 @@ class Discriminator(nn.Module):
                 padding,
                 bias=False,
             ),
-            #nn.BatchNorm2d(out_channels),
+            # nn.BatchNorm2d(out_channels),
             nn.LeakyReLU(0.2),
         )
 
@@ -68,7 +68,7 @@ class Generator(nn.Module):
                 padding,
                 bias=False,
             ),
-            #nn.BatchNorm2d(out_channels),
+            # nn.BatchNorm2d(out_channels),
             nn.ReLU(),
         )
 
@@ -82,6 +82,7 @@ def initialize_weights(model):
         if isinstance(m, (nn.Conv2d, nn.ConvTranspose2d, nn.BatchNorm2d)):
             nn.init.normal_(m.weight.data, 0.0, 0.02)
 
+
 def test():
     N, in_channels, H, W = 8, 3, 64, 64
     noise_dim = 100
@@ -91,6 +92,5 @@ def test():
     gen = Generator(noise_dim, in_channels, 8)
     z = torch.randn((N, noise_dim, 1, 1))
     assert gen(z).shape == (N, in_channels, H, W), "Generator test failed"
-
 
 # test()

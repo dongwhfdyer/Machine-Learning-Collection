@@ -18,7 +18,6 @@ Input dataset to train() function must be a numpy array containing both feature 
 
 """
 
-
 from collections import Counter
 import numpy as np
 
@@ -265,7 +264,6 @@ class DecisionTree:
 
 
 if __name__ == "__main__":
-
     # # test dataset
     # X = np.array([[1, 1,0], [3, 1, 0], [1, 4, 0], [2, 4, 1], [3, 3, 1], [5, 1, 1]])
     # y = np.array([0, 0, 0, 1, 1, 1])

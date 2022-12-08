@@ -45,16 +45,16 @@ AUTOTUNE = tf.data.experimental.AUTOTUNE
 train_dataset = tf.data.Dataset.from_tensor_slices((train_images, train_labels))
 train_dataset = (
     train_dataset.shuffle(buffer_size=len(train_labels))
-    .map(read_image)
-    .batch(batch_size=BATCH_SIZE)
-    .prefetch(buffer_size=AUTOTUNE)
+        .map(read_image)
+        .batch(batch_size=BATCH_SIZE)
+        .prefetch(buffer_size=AUTOTUNE)
 )
 
 test_dataset = tf.data.Dataset.from_tensor_slices((test_images, test_labels))
 test_dataset = (
     test_dataset.map(read_image)
-    .batch(batch_size=BATCH_SIZE)
-    .prefetch(buffer_size=AUTOTUNE)
+        .batch(batch_size=BATCH_SIZE)
+        .prefetch(buffer_size=AUTOTUNE)
 )
 
 inputs = keras.Input(shape=(64, 64, 1))
@@ -66,7 +66,7 @@ x = layers.Conv2D(
 )(inputs)
 x = layers.BatchNormalization()(x)
 x = keras.activations.relu(x)
-x = layers.Conv2D(64, 3, kernel_regularizer=regularizers.l2(WEIGHT_DECAY),)(x)
+x = layers.Conv2D(64, 3, kernel_regularizer=regularizers.l2(WEIGHT_DECAY), )(x)
 x = layers.BatchNormalization()(x)
 x = keras.activations.relu(x)
 x = layers.MaxPooling2D()(x)

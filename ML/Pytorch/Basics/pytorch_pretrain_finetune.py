@@ -32,6 +32,7 @@ learning_rate = 1e-3
 batch_size = 1024
 num_epochs = 5
 
+
 # Simple Identity class that let's input pass without changes
 class Identity(nn.Module):
     def __init__(self):
@@ -55,7 +56,6 @@ model.classifier = nn.Sequential(
     nn.Linear(512, 100), nn.ReLU(), nn.Linear(100, num_classes)
 )
 model.to(device)
-
 
 # Load Data
 train_dataset = datasets.CIFAR10(
@@ -88,7 +88,8 @@ for epoch in range(num_epochs):
         # gradient descent or adam step
         optimizer.step()
 
-    print(f"Cost at epoch {epoch} is {sum(losses)/len(losses):.5f}")
+    print(f"Cost at epoch {epoch} is {sum(losses) / len(losses):.5f}")
+
 
 # Check accuracy on training & test to see how good our model
 
@@ -114,7 +115,7 @@ def check_accuracy(loader, model):
             num_samples += predictions.size(0)
 
         print(
-            f"Got {num_correct} / {num_samples} with accuracy {float(num_correct)/float(num_samples)*100:.2f}"
+            f"Got {num_correct} / {num_samples} with accuracy {float(num_correct) / float(num_samples) * 100:.2f}"
         )
 
     model.train()

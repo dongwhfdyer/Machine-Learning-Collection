@@ -47,7 +47,6 @@ train_transforms = A.Compose(
     ], keypoint_params=A.KeypointParams(format="xy", remove_invisible=False),
 )
 
-
 val_transforms = A.Compose(
     [
         A.Resize(height=96, width=96),

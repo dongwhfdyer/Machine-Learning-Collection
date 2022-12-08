@@ -59,7 +59,7 @@ class MyModel(nn.Module):
         super().__init__()
         self.model = nn.Sequential(
             nn.BatchNorm1d((1536 + 1) * 2),
-            nn.Linear((1536+1) * 2, 500),
+            nn.Linear((1536 + 1) * 2, 500),
             nn.BatchNorm1d(500),
             nn.ReLU(),
             nn.Dropout(0.2),
@@ -111,7 +111,7 @@ if __name__ == "__main__":
             # gradient descent or adam step
             optimizer.step()
 
-        print(f"Loss: {sum(losses)/len(losses)}")
+        print(f"Loss: {sum(losses) / len(losses)}")
 
     if config.SAVE_MODEL:
         checkpoint = {"state_dict": model.state_dict(), "optimizer": optimizer.state_dict()}

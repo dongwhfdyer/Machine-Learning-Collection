@@ -1,7 +1,6 @@
 import torch
 import torch.nn as nn
 
-
 VGG_types = {
     "VGG11": [64, "M", 128, "M", 256, 256, "M", 512, 512, "M", 512, 512, "M"],
     "VGG13": [64, 64, "M", 128, 128, "M", 256, 256, "M", 512, 512, "M", 512, 512, "M"],
@@ -53,7 +52,7 @@ VGG_types = {
 
 class VGG(nn.Module):
     def __init__(
-        self, vgg_type, in_channels, init_weights=True, batch_norm=True, num_classes=10
+            self, vgg_type, in_channels, init_weights=True, batch_norm=True, num_classes=10
     ):
         super().__init__()
 
@@ -134,6 +133,5 @@ def test():
     x = torch.randn(64, 1, 32, 32)
     y = net(x)
     print(y.size())
-
 
 # test()

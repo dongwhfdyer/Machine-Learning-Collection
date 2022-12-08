@@ -4,6 +4,7 @@ import numpy as np
 import torch
 from PIL import Image
 
+
 def ShearX(img, v):  # [-0.3, 0.3]
     assert -0.3 <= v <= 0.3
     if random.random() > 0.5:
@@ -146,11 +147,13 @@ def SamplePairing(imgs):  # [0, 0.4]
         i = np.random.choice(len(imgs))
         img2 = PIL.Image.fromarray(imgs[i])
         return PIL.Image.blend(img1, img2, v)
+
     return f
 
 
 def Identity(img, v):
     return img
+
 
 def augment_list():
     l = [
@@ -174,10 +177,11 @@ def augment_list():
 
     return l
 
+
 class RandAugment:
     def __init__(self, n, m):
         self.n = n
-        self.m = m      # [0, 30]
+        self.m = m  # [0, 30]
         self.augment_list = augment_list()
 
     def __call__(self, img):

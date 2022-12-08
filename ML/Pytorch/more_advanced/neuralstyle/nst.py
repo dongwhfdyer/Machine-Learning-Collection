@@ -86,9 +86,8 @@ for step in range(total_steps):
 
     # iterate through all the features for the chosen layers
     for gen_feature, orig_feature, style_feature in zip(
-        generated_features, original_img_features, style_features
+            generated_features, original_img_features, style_features
     ):
-
         # batch_size will just be 1
         batch_size, channel, height, width = gen_feature.shape
         original_loss += torch.mean((gen_feature - orig_feature) ** 2)

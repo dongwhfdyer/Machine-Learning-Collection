@@ -6,9 +6,10 @@ import torchvision
 import torch.nn as nn
 import warnings
 
+
 # Print losses occasionally and print to tensorboard
 def plot_to_tensorboard(
-    writer, loss_critic, loss_gen, real, fake, tensorboard_step
+        writer, loss_critic, loss_gen, real, fake, tensorboard_step
 ):
     writer.add_scalar("Loss Critic", loss_critic, global_step=tensorboard_step)
 
@@ -122,5 +123,3 @@ class EMA:
 
     def save_ema_weights(self):
         torch.save(self.registered, self.save_filename)
-
-

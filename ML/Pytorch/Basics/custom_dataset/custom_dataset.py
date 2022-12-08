@@ -98,7 +98,8 @@ for epoch in range(num_epochs):
         # gradient descent or adam step
         optimizer.step()
 
-    print(f"Cost at epoch {epoch} is {sum(losses)/len(losses)}")
+    print(f"Cost at epoch {epoch} is {sum(losses) / len(losses)}")
+
 
 # Check accuracy on training to see how good our model is
 def check_accuracy(loader, model):
@@ -117,7 +118,7 @@ def check_accuracy(loader, model):
             num_samples += predictions.size(0)
 
         print(
-            f"Got {num_correct} / {num_samples} with accuracy {float(num_correct)/float(num_samples)*100:.2f}"
+            f"Got {num_correct} / {num_samples} with accuracy {float(num_correct) / float(num_samples) * 100:.2f}"
         )
 
     model.train()

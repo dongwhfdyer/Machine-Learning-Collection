@@ -30,6 +30,7 @@ learning_rate = 0.005
 batch_size = 64
 num_epochs = 3
 
+
 # Recurrent neural network (many-to-one)
 class RNN(nn.Module):
     def __init__(self, input_size, hidden_size, num_layers, num_classes):
@@ -130,6 +131,7 @@ for epoch in range(num_epochs):
         # gradient descent update step/adam step
         optimizer.step()
 
+
 # Check accuracy on training & test to see how good our model
 def check_accuracy(loader, model):
     num_correct = 0
@@ -153,5 +155,5 @@ def check_accuracy(loader, model):
     return num_correct / num_samples
 
 
-print(f"Accuracy on training set: {check_accuracy(train_loader, model)*100:2f}")
-print(f"Accuracy on test set: {check_accuracy(test_loader, model)*100:.2f}")
+print(f"Accuracy on training set: {check_accuracy(train_loader, model) * 100:2f}")
+print(f"Accuracy on test set: {check_accuracy(test_loader, model) * 100:.2f}")

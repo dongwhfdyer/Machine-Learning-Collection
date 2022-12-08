@@ -147,5 +147,4 @@ def test():
     y = net(torch.randn(64, 1, 32, 32))
     print(y.size())
 
-
 # test()

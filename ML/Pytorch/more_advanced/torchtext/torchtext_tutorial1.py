@@ -50,6 +50,7 @@ train_iterator, test_iterator = BucketIterator.splits(
     (train_data, test_data), batch_size=2, device=device
 )
 
+
 ######### Training a simple LSTM on this toy data of ours #########
 class RNN_LSTM(nn.Module):
     def __init__(self, input_size, embed_size, hidden_size, num_layers):

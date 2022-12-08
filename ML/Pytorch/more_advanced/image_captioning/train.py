@@ -74,7 +74,7 @@ def train():
             save_checkpoint(checkpoint)
 
         for idx, (imgs, captions) in tqdm(
-            enumerate(train_loader), total=len(train_loader), leave=False
+                enumerate(train_loader), total=len(train_loader), leave=False
         ):
             imgs = imgs.to(device)
             captions = captions.to(device)

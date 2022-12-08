@@ -100,7 +100,6 @@ acc_metric = keras.metrics.SparseCategoricalAccuracy()
 writer = tf.summary.create_file_writer("logs/train/")
 step = 0
 
-
 for epoch in range(num_epochs):
     for batch_idx, (x, y) in enumerate(ds_train):
         figure = image_grid(x, y, class_names)

@@ -18,6 +18,7 @@ tf.config.experimental.set_memory_growth(physical_devices[0], True)
     with_info=True,  # able to get info about dataset
 )
 
+
 # fig = tfds.show_examples(ds_train, ds_info, rows=4, cols=4)
 # print(ds_info)
 
@@ -59,7 +60,6 @@ model.compile(
 
 model.fit(ds_train, epochs=5, verbose=2)
 model.evaluate(ds_test)
-
 
 (ds_train, ds_test), ds_info = tfds.load(
     "imdb_reviews",

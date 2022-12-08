@@ -12,18 +12,19 @@ from torch.utils.tensorboard import SummaryWriter
 
 torch.backends.cudnn.benchmark = True
 
+
 def train_fn(
-    loader,
-    disc,
-    gen,
-    opt_gen,
-    opt_disc,
-    l1,
-    vgg_loss,
-    g_scaler,
-    d_scaler,
-    writer,
-    tb_step,
+        loader,
+        disc,
+        gen,
+        opt_gen,
+        opt_disc,
+        l1,
+        vgg_loss,
+        g_scaler,
+        d_scaler,
+        writer,
+        tb_step,
 ):
     loop = tqdm(loader, leave=True)
 
@@ -37,8 +38,8 @@ def train_fn(
             critic_fake = disc(fake.detach())
             gp = gradient_penalty(disc, high_res, fake, device=config.DEVICE)
             loss_critic = (
-                -(torch.mean(critic_real) - torch.mean(critic_fake))
-                + config.LAMBDA_GP * gp
+                    -(torch.mean(critic_real) - torch.mean(critic_fake))
+                    + config.LAMBDA_GP * gp
             )
 
         opt_disc.zero_grad()
@@ -112,7 +113,6 @@ def main():
             opt_disc,
             config.LEARNING_RATE,
         )
-
 
     for epoch in range(config.NUM_EPOCHS):
         tb_step = train_fn(

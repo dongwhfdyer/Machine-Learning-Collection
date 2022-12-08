@@ -60,8 +60,8 @@ def plot_examples(low_res_folder, gen):
         with torch.no_grad():
             upscaled_img = gen(
                 config.test_transform(image=np.asarray(image))["image"]
-                .unsqueeze(0)
-                .to(config.DEVICE)
+                    .unsqueeze(0)
+                    .to(config.DEVICE)
             )
         save_image(upscaled_img, f"saved/{file}")
     gen.train()

@@ -68,15 +68,13 @@ for epochs in range(10):
         # train here
         pass
 
-
 model.compile(
     optimizer=keras.optimizers.Adam(),
-    loss=[keras.losses.SparseCategoricalCrossentropy(from_logits=True),],
+    loss=[keras.losses.SparseCategoricalCrossentropy(from_logits=True), ],
     metrics=["accuracy"],
 )
 
 model.fit(ds_train, epochs=10, verbose=2)
-
 
 #                           METHOD 2
 # ================================================================== #
@@ -126,7 +124,7 @@ for epoch in range(10):
 # Redo model.compile to reset the optimizer states
 model.compile(
     optimizer=keras.optimizers.Adam(),
-    loss=[keras.losses.SparseCategoricalCrossentropy(from_logits=True),],
+    loss=[keras.losses.SparseCategoricalCrossentropy(from_logits=True), ],
     metrics=["accuracy"],
 )
 

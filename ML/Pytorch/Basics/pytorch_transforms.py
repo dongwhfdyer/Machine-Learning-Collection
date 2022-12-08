@@ -20,6 +20,7 @@ from torch.utils.data import (
 import torchvision.datasets as datasets  # Has standard datasets we can import in a nice way
 import torchvision.transforms as transforms  # Transformations we can perform on our dataset
 
+
 # Simple CNN
 class CNN(nn.Module):
     def __init__(self, in_channels, num_classes):
@@ -60,7 +61,6 @@ learning_rate = 1e-4
 batch_size = 64
 num_epochs = 5
 
-
 # Load pretrain model & modify it
 model = CNN(in_channels=3, num_classes=10)
 model.classifier = nn.Sequential(nn.Linear(512, 100), nn.ReLU(), nn.Linear(100, 10))
@@ -88,7 +88,6 @@ my_transforms = transforms.Compose(
         ),  # Note: these values aren't optimal
     ]
 )
-
 
 train_dataset = datasets.CIFAR10(
     root="dataset/", train=True, transform=my_transforms, download=True
@@ -120,7 +119,8 @@ for epoch in range(num_epochs):
         # gradient descent or adam step
         optimizer.step()
 
-    print(f"Cost at epoch {epoch} is {sum(losses)/len(losses):.5f}")
+    print(f"Cost at epoch {epoch} is {sum(losses) / len(losses):.5f}")
+
 
 # Check accuracy on training & test to see how good our model
 
@@ -146,7 +146,7 @@ def check_accuracy(loader, model):
             num_samples += predictions.size(0)
 
         print(
-            f"Got {num_correct} / {num_samples} with accuracy {float(num_correct)/float(num_samples)*100:.2f}"
+            f"Got {num_correct} / {num_samples} with accuracy {float(num_correct) / float(num_samples) * 100:.2f}"
         )
 
     model.train()

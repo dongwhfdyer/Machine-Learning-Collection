@@ -34,7 +34,7 @@ class SortArray(Dataset):
         )
 
         unsorted_arr = torch.rand(size=(size_of_array, self.batch_size)) * (
-            self.max_int - self.min_int
+                self.max_int - self.min_int
         )
         # unsorted_arr = torch.randint(
         #    low=self.min_int, high=self.max_int, size=(size_of_array, self.batch_size)

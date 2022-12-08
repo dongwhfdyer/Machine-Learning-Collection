@@ -5,15 +5,15 @@ from torch.utils.data import DataLoader, SubsetRandomSampler
 
 class mnist_data(object):
     def __init__(
-        self,
-        shuffle,
-        transform_train,
-        transform_test,
-        num_workers=0,
-        create_validation_set=True,
-        batch_size=128,
-        validation_size=0.2,
-        random_seed=1,
+            self,
+            shuffle,
+            transform_train,
+            transform_test,
+            num_workers=0,
+            create_validation_set=True,
+            batch_size=128,
+            validation_size=0.2,
+            random_seed=1,
     ):
         self.shuffle = shuffle
         self.validation_size = validation_size

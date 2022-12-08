@@ -13,15 +13,16 @@ from tensorflow.keras.layers import (
 import tensorflow as tf
 import typing
 
+
 @tf.function
 def block(
-    X: tf.Tensor,
-    kernel_size: int,
-    filters: typing.List[int],
-    stage_no: int,
-    block_name: str,
-    is_conv_layer: bool = False,
-    stride: int = 2
+        X: tf.Tensor,
+        kernel_size: int,
+        filters: typing.List[int],
+        stage_no: int,
+        block_name: str,
+        is_conv_layer: bool = False,
+        stride: int = 2
 ) -> tf.Tensor:
     """
     Block for residual network.
@@ -52,51 +53,51 @@ def block(
     #  First component
     # NOTE: if conv_layer, you need to do downsampling
     X = Conv2D(
-        filters = F1,
-        kernel_size = (1, 1),
-        strides = (stride, stride) if is_conv_layer else (1, 1),
-        padding = "valid",
-        name = conv_name_base + "2a",
-        kernel_initializer = "glorot_uniform",
+        filters=F1,
+        kernel_size=(1, 1),
+        strides=(stride, stride) if is_conv_layer else (1, 1),
+        padding="valid",
+        name=conv_name_base + "2a",
+        kernel_initializer="glorot_uniform",
     )(X)
-    X = BatchNormalization(axis = 3, name = bn_name_base + "2a")(X)
+    X = BatchNormalization(axis=3, name=bn_name_base + "2a")(X)
     X = Activation("relu")(X)
 
     # Second component
     X = Conv2D(
-        filters = F2,
-        kernel_size = (kernel_size, kernel_size),
-        strides = (1, 1),
-        padding = "same",
-        name = conv_name_base + "2b",
-        kernel_initializer = "glorot_uniform",
+        filters=F2,
+        kernel_size=(kernel_size, kernel_size),
+        strides=(1, 1),
+        padding="same",
+        name=conv_name_base + "2b",
+        kernel_initializer="glorot_uniform",
     )(X)
-    X = BatchNormalization(axis = 3, name = bn_name_base + "2b")(X)
+    X = BatchNormalization(axis=3, name=bn_name_base + "2b")(X)
     X = Activation("relu")(X)
 
     # Third component
     X = Conv2D(
-        filters = F3,
-        kernel_size = (1, 1),
-        strides = (1, 1),
-        padding = "valid",
-        name = conv_name_base + "2c",
-        kernel_initializer = "glorot_uniform",
+        filters=F3,
+        kernel_size=(1, 1),
+        strides=(1, 1),
+        padding="valid",
+        name=conv_name_base + "2c",
+        kernel_initializer="glorot_uniform",
     )(X)
-    X = BatchNormalization(axis = 3, name = bn_name_base + "2c")(X)
+    X = BatchNormalization(axis=3, name=bn_name_base + "2c")(X)
 
     # NOTE: if is_conv_layer, you need to do downsampling the X_shortcut to match the output (X) channel
     #       so it can be added together
     if is_conv_layer:
         X_shortcut = Conv2D(
-            filters = F3,
-            kernel_size = (1, 1),
-            strides = (stride, stride),
-            padding = "valid",
-            name = conv_name_base + "1",
-            kernel_initializer = "glorot_uniform",
+            filters=F3,
+            kernel_size=(1, 1),
+            strides=(stride, stride),
+            padding="valid",
+            name=conv_name_base + "1",
+            kernel_initializer="glorot_uniform",
         )(X_shortcut)
-        X_shortcut = BatchNormalization(axis = 3, name = bn_name_base + "1")(X_shortcut)
+        X_shortcut = BatchNormalization(axis=3, name=bn_name_base + "1")(X_shortcut)
 
     # Shortcut value
     X = Add()([X, X_shortcut])

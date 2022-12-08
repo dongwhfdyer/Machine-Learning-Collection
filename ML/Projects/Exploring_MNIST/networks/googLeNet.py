@@ -5,7 +5,7 @@ import torch.nn.functional as F
 
 class Inception(nn.Module):
     def __init__(
-        self, in_channels, out1x1, out3x3reduced, out3x3, out5x5reduced, out5x5, outpool
+            self, in_channels, out1x1, out3x3reduced, out3x3, out5x5reduced, out5x5, outpool
     ):
         super().__init__()
 
@@ -104,6 +104,5 @@ def test():
     x = torch.randn(3, 1, 32, 32)
     y = net(x)
     print(y.size())
-
 
 # test()

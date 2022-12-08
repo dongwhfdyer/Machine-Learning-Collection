@@ -12,7 +12,7 @@ from sklearn.metrics import log_loss
 
 
 def check_accuracy(
-    loader, model, loss_fn, input_shape=None, toggle_eval=True, print_accuracy=True
+        loader, model, loss_fn, input_shape=None, toggle_eval=True, print_accuracy=True
 ):
     """
     Check accuracy of model on data from loader

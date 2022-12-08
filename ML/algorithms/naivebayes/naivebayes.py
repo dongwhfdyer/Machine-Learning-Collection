@@ -64,4 +64,4 @@ if __name__ == "__main__":
     NB.fit(X)
     y_pred = NB.predict(X)
 
-    print(f"Accuracy: {sum(y_pred==y)/X.shape[0]}")
+    print(f"Accuracy: {sum(y_pred == y) / X.shape[0]}")

@@ -34,7 +34,7 @@ def train_one_epoch(loader, model, optimizer, loss_fn, scaler, device):
         loss.backward()
         optimizer.step()
 
-    print(f"Loss average over epoch: {(sum(losses)/num_examples)**0.5}")
+    print(f"Loss average over epoch: {(sum(losses) / num_examples) ** 0.5}")
 
 
 def main():
@@ -106,6 +106,7 @@ def main():
                 "optimizer": optimizer.state_dict(),
             }
             save_checkpoint(checkpoint, filename=config.CHECKPOINT_FILE)
+
 
 if __name__ == "__main__":
     main()

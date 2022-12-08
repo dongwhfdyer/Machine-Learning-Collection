@@ -101,13 +101,13 @@ def train_model_one_epoch(hparams):
 
     # write to TB
     run_dir = (
-        "logs/train/"
-        + str(units)
-        + "units_"
-        + str(drop_rate)
-        + "dropout_"
-        + str(learning_rate)
-        + "learning_rate"
+            "logs/train/"
+            + str(units)
+            + "units_"
+            + str(drop_rate)
+            + "dropout_"
+            + str(learning_rate)
+            + "learning_rate"
     )
 
     with tf.summary.create_file_writer(run_dir).as_default():

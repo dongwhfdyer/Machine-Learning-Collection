@@ -123,6 +123,7 @@ class Discriminator(nn.Module):
         x = self.blocks(x)
         return self.classifier(x)
 
+
 def initialize_weights(model, scale=0.1):
     for m in model.modules():
         if isinstance(m, nn.Conv2d):
@@ -145,10 +146,6 @@ def test():
     print(gen_out.shape)
     print(disc_out.shape)
 
+
 if __name__ == "__main__":
     test()
-
-
-
-
-

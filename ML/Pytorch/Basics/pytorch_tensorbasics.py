@@ -114,7 +114,6 @@ t += x  # Also inplace: t = t + x is not inplace, bit confusing.
 z = x.pow(2)  # z = [1, 4, 9]
 z = x ** 2  # z = [1, 4, 9]
 
-
 # -- Simple Comparison --
 z = x > 0  # Returns [True, True, True]
 z = x < 0  # Returns [False, False, False]
@@ -150,10 +149,10 @@ out_bmm = torch.bmm(tensor1, tensor2)  # Will be shape: (b x n x p)
 x1 = torch.rand((5, 5))
 x2 = torch.ones((1, 5))
 z = (
-    x1 - x2
+        x1 - x2
 )  # Shape of z is 5x5: How? The 1x5 vector (x2) is subtracted for each row in the 5x5 (x1)
 z = (
-    x1 ** x2
+        x1 ** x2
 )  # Shape of z is 5x5: How? Broadcasting! Element wise exponentiation for every row
 
 # Other useful tensor operations
