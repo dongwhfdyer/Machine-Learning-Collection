@@ -38,7 +38,7 @@ class DecoderRNN(nn.Module):
 class CNNtoRNN(nn.Module):
     def __init__(self, embed_size, hidden_size, vocab_size, num_layers):
         super(CNNtoRNN, self).__init__()
-        self.encoderCNN = EncoderCNN(embed_size)G
+        self.encoderCNN = EncoderCNN(embed_size)
         self.decoderRNN = DecoderRNN(embed_size, hidden_size, vocab_size, num_layers)
 
     def forward(self, images, captions):
@@ -67,3 +67,8 @@ class CNNtoRNN(nn.Module):
 
 
 if __name__ == '__main__':
+    model = CNNtoRNN(256, 512, 1000, 1)
+    rand_input = torch.rand(3, 3, 224, 224)
+    rand_caption = torch.randint(0, 1000, (10,))
+    print(model(rand_input, rand_caption).shape)
+    print(model.caption_image(rand_input, None))
